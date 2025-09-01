@@ -1,0 +1,19 @@
+**********************
+PowerShell transcript start
+Start time: 20250831221557
+Username: DESKTOP-55TBS5I\Boehn
+RunAs User: DESKTOP-55TBS5I\Boehn
+Configuration Name: 
+Machine: DESKTOP-55TBS5I (Microsoft Windows NT 10.0.19045.0)
+Host Application: C:\Program Files\PowerShell\7-preview\pwsh.dll D:\Libraries\Repository\Taskchief\Taskchief126.ps1
+Process ID: 1248
+PSVersion: 7.6.0-preview.4
+PSEdition: Core
+GitCommitId: 7.6.0-preview.4
+OS: Microsoft Windows 10.0.19045
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************

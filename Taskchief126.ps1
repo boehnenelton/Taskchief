@@ -24,20 +24,38 @@ $Script_GUID = ""
 #endregion
 
 #region Path Definitions
-$Script_Framework_Path = "C:\Users\Boehn\Cloud\OneDrive\Scripting_Framework"
-$Log_Root_Path = "$Script_Framework_Path\Global_Logs\$Script_Name"
-$Backup_Root_Path = "$Script_Framework_Path\Automated-Self_Backup"
-$Script_Index_Path = "$Script_Framework_Path\Script_Index.csv"
-$Data_Root_Path = "$PSScriptRoot\data\$Script_Name"
-$MetaData_Path = "$Data_Root_Path\$Script_Name.meta"
-$DebugFlagPath = "$PSScriptRoot\BEFlag.DEBUG"
-$Timestamp = Get-Date -Format "yyyyMMdd_HHmmss"
-$TranscriptPath = "$PSScriptRoot\Last_Transcript_$Timestamp.txt"
-$JobDataPath = "$Data_Root_Path\timers"
-$JobLogPath = "$JobDataPath\scheduled_tasks.json"
+# Root path for all script-generated data, logs, and backups.
+# This makes the script portable by storing everything relative to its location under ./data/TaskChief/
+$Data_Root_Path = Join-Path -Path $PSScriptRoot -ChildPath "data\$Script_Name"
 
-if (-not (Test-Path $Data_Root_Path)) { New-Item -ItemType Directory -Path $Data_Root_Path -Force | Out-Null }
-if (-not (Test-Path $JobDataPath)) { New-Item -ItemType Directory -Path $JobDataPath -Force | Out-Null }
+# Subdirectories for organized storage within the data root path
+$Log_Root_Path = Join-Path -Path $Data_Root_Path -ChildPath "logs"
+$Backup_Root_Path = Join-Path -Path $Data_Root_Path -ChildPath "backups"
+$JobDataPath = Join-Path -Path $Data_Root_Path -ChildPath "timers"
+$Transcript_Root_Path = Join-Path -Path $PSScriptRoot -ChildPath "transcripts" # Storing transcripts in their own folder at the script root for clarity
+
+# Specific file paths
+$MetaData_Path = Join-Path -Path $Data_Root_Path -ChildPath "$Script_Name.meta"
+$Script_Index_Path = Join-Path -Path $Data_Root_Path -ChildPath "script_index.csv"
+$JobLogPath = Join-Path -Path $JobDataPath -ChildPath "scheduled_tasks.json"
+
+# Other paths relative to the script's root
+$DebugFlagPath = Join-Path -Path $PSScriptRoot -ChildPath "BEFlag.DEBUG"
+$Timestamp = Get-Date -Format "yyyyMMdd_HHmmss"
+$TranscriptPath = Join-Path -Path $Transcript_Root_Path -ChildPath "Last_Transcript_$Timestamp.txt"
+
+# Ensure all necessary directories exist before use
+@(
+    $Data_Root_Path,
+    $Log_Root_Path,
+    $Backup_Root_Path,
+    $JobDataPath,
+    $Transcript_Root_Path
+) | ForEach-Object {
+    if (-not (Test-Path $_)) {
+        New-Item -ItemType Directory -Path $_ -Force -ErrorAction SilentlyContinue| Out-Null
+    }
+}
 #endregion
 
 #region COMPLIANCY FEATURES
@@ -200,9 +218,6 @@ if ($compliant_features) {
 #endregion COMPLIANCY FEATURES
 
 #region Job Log Management
-$JobDataPath = "$PSScriptRoot\data\$Script_Name\timers"
-$JobLogPath = "$JobDataPath\scheduled_tasks.json"
-
 Function Read-Jobs {
     if (Test-Path $JobLogPath) {
         try {

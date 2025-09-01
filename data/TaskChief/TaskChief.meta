@@ -1,0 +1,10 @@
+{
+  "Script_Name": "TaskChief",
+  "Script_Version": "1-0-26",
+  "Script_Description": "A menu-driven PowerShell script to create and manage scheduled jobs.",
+  "Script_Type": "System_Script",
+  "Human_Friendly_Name": "Task Chief",
+  "Script_GUID": "de5e71d1-b1a1-4870-b4ac-5f8d1281cd61",
+  "Author": "Elton Boehnen",
+  "Author_Email": "Boehnenemail2024@gmail.com"
+}

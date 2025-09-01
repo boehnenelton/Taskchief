@@ -1,0 +1,7 @@
+[2025-08-31 22:12:03] First run detected, creating metadata.
+[2025-08-31 22:12:03] Cannot create backup: Script path is null.
+[2025-08-31 22:12:03] Successfully updated script index.
+[2025-08-31 22:12:03] Jobs file does not exist, returning empty array.
+[2025-08-31 22:12:04] Found 1 tasks: PS-Timer-Job-136396979
+[2025-08-31 22:12:05] Cleaned up orphaned task: PS-Timer-Job-136396979
+[2025-08-31 22:15:57] Jobs file does not exist, returning empty array.
